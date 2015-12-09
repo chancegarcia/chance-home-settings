@@ -1,0 +1,17 @@
+[user]
+	name = chance garcia
+	email = develop@chancegarcia.com
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = auto
+[core]
+	excludesfile = /Users/chance/.gitexclude
+	autocrlf = input
+	editor = vi
+[commit]
+	template = /Users/chance/.gitcommit.template
+[push]
+	default = simple

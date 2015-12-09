@@ -1,0 +1,11 @@
+/.idea
+/admin_toolbox
+/.htaccess
+/app/etc/local.xml
+/.htaccess.chance
+/app/etc/local.xml.chance
+.DS_Store
+/projectFilesBackup
+*.tar.gz
+*.gz
+*.tar
