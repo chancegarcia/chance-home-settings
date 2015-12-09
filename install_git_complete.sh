@@ -1,6 +1,7 @@
 #!/bin/bash
 # original script from https://gist.github.com/johngibb/972430
 URL="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+# may need to use prompt script from https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
 
 
 PROFILE="$HOME/.profile"
