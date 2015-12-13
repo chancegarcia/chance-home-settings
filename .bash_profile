@@ -11,22 +11,36 @@ export CLICOLOR=1
     LIGHT_GREEN="\[\033[1;32m\]"
     WHITE="\[\033[1;37m\]"
     LIGHT_GRAY="\[\033[0;37m\]"
+    PURPLE="\[\033[0;35m\]"
+    CYAN="\[\033[0;36m\]"
     COLOR_NONE="\[\e[0m\]"
 
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_DESCRIBE_STYLE="contains"
+#GIT_PS1_SHOWCOLORHINTS=true
 
 my_git_status() {
-    if [[ $(__git_ps1) =~ \*\)$ ]]
+     # the state is clean, changes are commited
+    MY_GIT_STATUS="$GREEN"
+    
+    if [[ $(__git_ps1) =~ \\*\)$ ]]
     # a file has been modified but not added
-    then echo "$YELLOW"$(__git_ps1 " (%s)")
-    elif [[ $(__git_ps1) =~ \+\)$ ]]
-    # a file has been added, but not commited
-    then echo "$LIGHT_RED"$(__git_ps1 " (%s)")
-    # the state is clean, changes are commited
-    else echo "$GREEN"$(__git_ps1 " (%s)")
+    then MY_GIT_STATUS="$YELLOW"
     fi
+    if [[ $(__git_ps1) =~ \\+\)$ ]]
+    # a file has been added, but not commited
+    then MY_GIT_STATUS="$PURPLE"
+    fi
+    if [[ $(__git_ps1) =~ \\%\)$ ]]
+    # untracked files
+    then MY_GIT_STATUS="$WHITE"
+    fi
+
+    echo "$MY_GIT_STATUS"$(__git_ps1 " (%s)")
 }
 
 function prompt_func() {
