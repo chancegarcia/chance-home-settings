@@ -18,9 +18,11 @@ export CLICOLOR=1
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWUPSTREAM="auto"
-GIT_PS1_DESCRIBE_STYLE="branch"
+# use legacy to show expected upstream states; look into why later
+GIT_PS1_SHOWUPSTREAM="auto legacy"
+GIT_PS1_DESCRIBE_STYLE="default"
 #GIT_PS1_SHOWCOLORHINTS=true
 
 my_git_status() {
