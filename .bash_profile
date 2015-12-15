@@ -33,9 +33,8 @@ my_git_status() {
     elif [[ $(__git_ps1) =~ [\+|\<] ]]
     # a file has been added, but not committed and/or branch is behind the remote (pull recommended)
     then statusColor="$LIGHT_RED"
-    # the state is clean, changes are committed and branch is in sync with the remote
-    elif [[ $(__git_ps1) =~ \= ]]
-    then statusColor="$GREEN"
+    # the state is clean, changes are committed and/or branch is in sync with the remote
+    else statusColor="$GREEN"
     fi
 
     echo $statusColor$(__git_ps1 " (%s)")
