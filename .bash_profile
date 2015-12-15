@@ -28,12 +28,12 @@ GIT_PS1_DESCRIBE_STYLE="default"
 my_git_status() {
     statusColor=""
     if [[ $(__git_ps1) =~ [\*|\>] ]]
-    # a file has been modified but not added
+    # a file has been modified but not added and/or branch is ahead of the remote (push recommended)
     then statusColor="$YELLOW"
     elif [[ $(__git_ps1) =~ [\+|\<] ]]
-    # a file has been added, but not commited
+    # a file has been added, but not committed and/or branch is behind the remote (pull recommended)
     then statusColor="$LIGHT_RED"
-    # the state is clean, changes are commited
+    # the state is clean, changes are committed and branch is in sync with the remote
     elif [[ $(__git_ps1) =~ \= ]]
     then statusColor="$GREEN"
     fi
