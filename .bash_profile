@@ -26,23 +26,19 @@ GIT_PS1_DESCRIBE_STYLE="default"
 #GIT_PS1_SHOWCOLORHINTS=true
 
 my_git_status() {
-     # the state is clean, changes are commited
-    MY_GIT_STATUS="$GREEN"
-    
-    if [[ $(__git_ps1) =~ \\*\)$ ]]
+    statusColor=""
+    if [[ $(__git_ps1) =~ [\*|\>] ]]
     # a file has been modified but not added
-    then MY_GIT_STATUS="$YELLOW"
-    fi
-    if [[ $(__git_ps1) =~ \\+\)$ ]]
+    then statusColor="$YELLOW"
+    elif [[ $(__git_ps1) =~ [\+|\<] ]]
     # a file has been added, but not commited
-    then MY_GIT_STATUS="$PURPLE"
-    fi
-    if [[ $(__git_ps1) =~ \\%\)$ ]]
-    # untracked files
-    then MY_GIT_STATUS="$WHITE"
+    then statusColor="$LIGHT_RED"
+    # the state is clean, changes are commited
+    elif [[ $(__git_ps1) =~ \= ]]
+    then statusColor="$GREEN"
     fi
 
-    echo "$MY_GIT_STATUS"$(__git_ps1 " (%s)")
+    echo $statusColor$(__git_ps1 " (%s)")
 }
 
 function prompt_func() {
