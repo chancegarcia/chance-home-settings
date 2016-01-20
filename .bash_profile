@@ -33,7 +33,7 @@ my_git_status() {
     elif [[ $(__git_ps1) =~ [\+|\<] ]]
     # a file has been added, but not committed and/or branch is behind the remote (pull recommended)
     then statusColor="$LIGHT_RED"
-    # the state is clean, changes are committed and/or branch is in sync with the remote
+    # the state is clean, changes are committed and branch is in sync with the remote
     else statusColor="$GREEN"
     fi
 
@@ -72,6 +72,12 @@ alias duh='dulist=$(du -sh */); for i in T G M K; do printf "$dulist"|egrep "^[0
 alias ll='ls -hal'
 alias gitl='git log --stat'
 alias pong='ping -c2'
+
+# see https://getcomposer.org/xdebug for reasoning behind aliases below
+# Load xdebug Zend extension with php command
+alias php='php -dzend_extension="/usr/local/opt/php56-xdebug/xdebug.so"'
+# PHPUnit needs xdebug for coverage. In this case, just make an alias with php command prefix.
+alias phpunit='php $(which phpunit)'
 
 function fun_history {
    # history|awk '{a[$2]++ } END{for(i in a){print a[i] " " i}}'|sort -rn|head
