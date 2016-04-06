@@ -73,6 +73,12 @@ alias ll='ls -hal'
 alias gitl='git log --stat'
 alias pong='ping -c2'
 
+# see https://getcomposer.org/xdebug for reasoning behind aliases below
+# Load xdebug Zend extension with php command
+alias php='php -dzend_extension="/usr/local/opt/php56-xdebug/xdebug.so"'
+# PHPUnit needs xdebug for coverage. In this case, just make an alias with php command prefix.
+alias phpunit='php $(which phpunit)'
+
 function fun_history {
    # history|awk '{a[$2]++ } END{for(i in a){print a[i] " " i}}'|sort -rn|head
     history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head
