@@ -33,7 +33,7 @@ my_git_status() {
     elif [[ $(__git_ps1) =~ [\+|\<] ]]
     # a file has been added, but not committed and/or branch is behind the remote (pull recommended)
     then statusColor="$LIGHT_RED"
-    # the state is clean, changes are committed and/or branch is in sync with the remote
+    # the state is clean, changes are committed and branch is in sync with the remote
     else statusColor="$GREEN"
     fi
 
@@ -75,9 +75,9 @@ alias pong='ping -c2'
 
 # see https://getcomposer.org/xdebug for reasoning behind aliases below
 # Load xdebug Zend extension with php command
-alias php='php -dzend_extension="/usr/local/opt/php56-xdebug/xdebug.so"'
+#alias php='php -dzend_extension="/usr/local/opt/php56-xdebug/xdebug.so"'
 # PHPUnit needs xdebug for coverage. In this case, just make an alias with php command prefix.
-alias phpunit='php $(which phpunit)'
+#alias phpunit='php $(which phpunit)'
 
 function fun_history {
    # history|awk '{a[$2]++ } END{for(i in a){print a[i] " " i}}'|sort -rn|head
@@ -93,14 +93,20 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 #export PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 
-
-
 export SENCHA_CMD_3_0_0="/Users/chance/bin/Sencha/Cmd/5.1.2.52"
 
 export PATH=/Users/chance/bin/Sencha/Cmd/5.1.2.52:/Users/chance/.composer/vendor/bin:$PATH
 
+# composer global
+export PATH=~/.composer/vendor/bin:$PATH
+
 # export for phpstorm debugging
 export XDEBUG_CONFIG="idekey=PHPSTORM"
+
+# too many files open
+# https://docs.basho.com/riak/kv/2.1.4/using/performance/open-files-limit/
+ulimit -n 65536
+ulimit -u 2048
 
 # autostart ssh agent if no passphrase
 #eval $(ssh-agent)
