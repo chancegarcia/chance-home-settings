@@ -1,0 +1,58 @@
+#!/bin/bash
+
+AUTO_COMMIT=false
+GIT_PUSH=false
+DRY_RUN=false
+
+OPTS=`/usr/local/opt/gnu-getopt/bin/getopt -o '' --longoptions auto-commit::,git-push::,dry-run:: -n 'homesync' -- "$@"`
+
+if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
+
+#echo "$OPTS"
+eval set -- "$OPTS"
+
+while true; do
+#    echo $1;
+  case "$1" in
+    --auto-commit) AUTO_COMMIT=true; shift 2 ;;
+    --git-push) GIT_PUSH=true; shift 2 ;;
+    --dry-run) DRY_RUN=true; shift 2 ;;
+    --) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+# copy home settings to public repo
+cp ~/.bash_profile ~/home-settings-repo/. 
+rsync --verbose --progress --human-readable --exclude=".gitprompt" ~/.git* ~/home-settings-repo/.
+cp ~/.exrc ~/home-settings-repo/. 
+#cp ~/.vimrc ~/home-settings-repo/. 
+
+# copy home settings to private repo
+cp -r ~/.ssh ~/private-home-settings-repo/.
+rsync --verbose --recursive --times --compress --stats --progress --human-readable --links --hard-links --exclude="cache" --exclude="vendor/bin" ~/.composer ~/private-home-settings-repo/.
+
+#ARG1=$1
+
+function auto_commit {
+    MSG=$@
+    git add .
+    git commit -m "$MSG"
+
+}
+
+if [ true = $AUTO_COMMIT ]; then
+    echo "auto committing..."
+    COMMIT_MSG="auto committing `date '+%Y-%m-%d %H:%M:%S'`"
+    echo $COMMIT_MSG
+
+    cd ~/home-settings-repo
+    auto_commit $COMMIT_MSG
+
+    cd ~/private-home-settings-repo
+    auto_commit $COMMIT_MSG
+fi
+
+#echo AUTO_COMMIT=$AUTO_COMMIT
+#echo GIT_PUSH=$GIT_PUSH
+#echo DRY_RUN=$DRY_RUN
