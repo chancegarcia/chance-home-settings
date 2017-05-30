@@ -33,7 +33,7 @@ my_git_status() {
     elif [[ $(__git_ps1) =~ [\+|\<] ]]
     # a file has been added, but not committed and/or branch is behind the remote (pull recommended)
     then statusColor="$LIGHT_RED"
-    # the state is clean, changes are committed and branch is in sync with the remote
+    # the state is clean, changes are committed and/or branch is in sync with the remote
     else statusColor="$GREEN"
     fi
 
@@ -87,32 +87,39 @@ function fun_history {
 alias hist=fun_history
 
 alias now='date +%Y%m%d%H%M%S'
+alias d1='cd /Volumes/alice/projects/bburro/d1app'
+alias cb='cd /Volumes/alice/projects/bburro/casebox'
+alias jfo='cd /Volumes/alice/projects/bburro/jfo'
+alias smr='cd /Volumes/alice/projects/bburro/smrconnect'
+alias resume='cd /Volumes/alice/projects/mine/resume'
 
 # editted for homebrew
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 #export PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-
-export SENCHA_CMD_3_0_0="/Users/chance/bin/Sencha/Cmd/5.1.2.52"
-
-export PATH=/Users/chance/bin/Sencha/Cmd/5.1.2.52:/Users/chance/.composer/vendor/bin:$PATH
-
-# composer global
-export PATH=~/.composer/vendor/bin:$PATH
+#export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 
 # export for phpstorm debugging
 export XDEBUG_CONFIG="idekey=PHPSTORM"
+#export PHP_IDE_CONFIG="serverName=localhost"
 
 # too many files open
 # https://docs.basho.com/riak/kv/2.1.4/using/performance/open-files-limit/
-ulimit -n 65536
-ulimit -u 2048
+#ulimit -n 65536
+#ulimit -u 2048
 
 # autostart ssh agent if no passphrase
 #eval $(ssh-agent)
 #ssh-add
-export PATH="/Users/chance/bin/Sencha/Cmd:$PATH"
+
+export PATH="/opt/Sencha/Cmd:$PATH"
+
+# composer global
+
+export PATH=~/.composer/vendor/bin:$PATH
 
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
+
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+export PATH="/usr/local/opt/bison/bin:$PATH"
