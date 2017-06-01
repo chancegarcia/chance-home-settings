@@ -2,6 +2,7 @@
 
 AUTO_COMMIT=false
 GIT_PUSH=false
+# @todo: implement dry run
 DRY_RUN=false
 
 OPTS=`/usr/local/opt/gnu-getopt/bin/getopt -o '' --longoptions auto-commit::,git-push::,dry-run:: -n 'homesync' -- "$@"`

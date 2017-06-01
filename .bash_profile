@@ -123,3 +123,4 @@ fi
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 export PATH="/usr/local/opt/bison/bin:$PATH"
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
