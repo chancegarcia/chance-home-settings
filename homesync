@@ -42,6 +42,10 @@ function auto_commit {
 
 }
 
+function git_push {
+    git push
+}
+
 if [ true = $AUTO_COMMIT ]; then
     echo "auto committing..."
     COMMIT_MSG="auto committing `date '+%Y-%m-%d %H:%M:%S'`"
@@ -52,6 +56,14 @@ if [ true = $AUTO_COMMIT ]; then
 
     cd ~/private-home-settings-repo
     auto_commit $COMMIT_MSG
+fi
+
+if [ true = $GIT_PUSH ]; then
+    cd ~/home-settings-repo
+    git_push
+
+    cd ~/private-home-settings-repo
+    git_push
 fi
 
 #echo AUTO_COMMIT=$AUTO_COMMIT
